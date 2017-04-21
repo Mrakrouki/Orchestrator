@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:GestionStock.wsdl="http://www.wine-mania.com/wsdl/GestionStock.wsdl" xmlns:afcepf.fr="http://afcepf.fr" xmlns:paypal.wine.afcepf.fr="http://paypal.wine.afcepf.fr" xmlns:shipping.soap.ws.atod.afcepf.fr="shipping.soap.ws.atod.afcepf.fr">
+  <process name="afcepf.fr:Commande">
+    <active>true</active>
+    <retired>false</retired>
+    <process-events generate="all"/>
+    <provide partnerLink="client">
+      <service name="afcepf.fr:CommandeService" port="CommandePort"/>
+    </provide>
+    <invoke partnerLink="PaymentPL">
+      <service name="paypal.wine.afcepf.fr:ExpressCheckoutServiceService" port="ExpressCheckoutServicePort"/>
+    </invoke>
+    <invoke partnerLink="LivraisonPL">
+      <service name="shipping.soap.ws.atod.afcepf.fr:SoapShippingServiceService" port="SoapShippingServicePort"/>
+    </invoke>
+    <invoke partnerLink="StockPL">
+      <service name="GestionStock.wsdl:GestionStockService" port="Stock_Port"/>
+    </invoke>
+  </process>
+</deploy>

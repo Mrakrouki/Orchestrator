@@ -1,0 +1,165 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="shipping.soap.ws.atod.afcepf.fr" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="SoapShippingServiceService" targetNamespace="shipping.soap.ws.atod.afcepf.fr">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="shipping.soap.ws.atod.afcepf.fr" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="shipping.soap.ws.atod.afcepf.fr">
+  <xs:element name="followOrder" type="tns:followOrder"/>
+  <xs:element name="followOrderResponse" type="tns:followOrderResponse"/>
+  <xs:element name="getIdShipping" type="tns:getIdShipping"/>
+  <xs:element name="getIdShippingResponse" type="tns:getIdShippingResponse"/>
+  <xs:element name="setShipping" type="tns:setShipping"/>
+  <xs:element name="setShippingResponse" type="tns:setShippingResponse"/>
+  <xs:complexType name="getIdShipping">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="idShipping" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getIdShippingResponse">
+    <xs:sequence>
+      <xs:element name="isExistingIdShipping" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="followOrder">
+    <xs:sequence>
+      <xs:element name="detailOrder">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="0" name="key" type="xs:string"/>
+                  <xs:element minOccurs="0" name="value" type="xs:string"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="followOrderResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="statusShippingOrder" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="setShipping">
+    <xs:sequence>
+      <xs:element name="detailsOrder">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="0" name="key" type="xs:string"/>
+                  <xs:element minOccurs="0" name="value" type="xs:string"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="setShippingResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:element name="Exception" type="tns:Exception"/>
+  <xs:complexType name="Exception">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="followOrderResponse">
+    <wsdl:part element="tns:followOrderResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="setShippingResponse">
+    <wsdl:part element="tns:setShippingResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="followOrder">
+    <wsdl:part element="tns:followOrder" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getIdShippingResponse">
+    <wsdl:part element="tns:getIdShippingResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="Exception">
+    <wsdl:part element="tns:Exception" name="Exception">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getIdShipping">
+    <wsdl:part element="tns:getIdShipping" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="setShipping">
+    <wsdl:part element="tns:setShipping" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ISoapShippingService">
+    <wsdl:operation name="getIdShipping">
+      <wsdl:input message="tns:getIdShipping" name="getIdShipping">
+    </wsdl:input>
+      <wsdl:output message="tns:getIdShippingResponse" name="getIdShippingResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:Exception" name="Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="followOrder">
+      <wsdl:input message="tns:followOrder" name="followOrder">
+    </wsdl:input>
+      <wsdl:output message="tns:followOrderResponse" name="followOrderResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setShipping">
+      <wsdl:input message="tns:setShipping" name="setShipping">
+    </wsdl:input>
+      <wsdl:output message="tns:setShippingResponse" name="setShippingResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:Exception" name="Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SoapShippingServiceServiceSoapBinding" type="tns:ISoapShippingService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getIdShipping">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="getIdShipping">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getIdShippingResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="followOrder">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="followOrder">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="followOrderResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setShipping">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="setShipping">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="setShippingResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SoapShippingServiceService">
+    <wsdl:port binding="tns:SoapShippingServiceServiceSoapBinding" name="SoapShippingServicePort">
+      <soap:address location="http://192.168.102.183:28080/SOAPShipping-1.0.0/shippingCheckout"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

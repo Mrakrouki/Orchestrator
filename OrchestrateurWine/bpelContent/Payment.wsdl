@@ -1,0 +1,197 @@
+
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://paypal.wine.afcepf.fr" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="ExpressCheckoutServiceService" targetNamespace="http://paypal.wine.afcepf.fr">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://paypal.wine.afcepf.fr" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://paypal.wine.afcepf.fr">
+  <xs:element name="checkoutPaypal" type="tns:checkoutPaypal"/>
+  <xs:element name="checkoutPaypalResponse" type="tns:checkoutPaypalResponse"/>
+  <xs:element name="retrievePayment" type="tns:retrievePayment"/>
+  <xs:element name="retrievePaymentResponse" type="tns:retrievePaymentResponse"/>
+  <xs:complexType name="checkoutPaypal">
+    <xs:sequence>
+      <xs:element name="detailsPayment">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element minOccurs="0" name="key" type="xs:string"/>
+                  <xs:element minOccurs="0" name="value" type="xs:string"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="checkoutPaypalResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="checkoutDone" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="error">
+    <xs:complexContent>
+      <xs:extension base="tns:payPalModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="code" type="xs:string"/>
+          <xs:element minOccurs="0" name="debugId" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="details" nillable="true" type="tns:errorDetails"/>
+          <xs:element minOccurs="0" name="fmfDetails" type="tns:fmfDetails"/>
+          <xs:element minOccurs="0" name="informationLink" type="xs:string"/>
+          <xs:element maxOccurs="unbounded" minOccurs="0" name="links" nillable="true" type="tns:definitionsLinkdescription"/>
+          <xs:element minOccurs="0" name="message" type="xs:string"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="processorResponse" type="tns:processorResponse"/>
+          <xs:element minOccurs="0" name="purchaseUnitReferenceId" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="payPalModel">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="errorDetails">
+    <xs:complexContent>
+      <xs:extension base="tns:payPalModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="code" type="xs:string"/>
+          <xs:element minOccurs="0" name="field" type="xs:string"/>
+          <xs:element minOccurs="0" name="issue" type="xs:string"/>
+          <xs:element minOccurs="0" name="purchaseUnitReferenceId" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="fmfDetails">
+    <xs:complexContent>
+      <xs:extension base="tns:payPalModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="description" type="xs:string"/>
+          <xs:element minOccurs="0" name="filterId" type="xs:string"/>
+          <xs:element minOccurs="0" name="filterType" type="xs:string"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="definitionsLinkdescription">
+    <xs:complexContent>
+      <xs:extension base="tns:payPalModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="encType" type="xs:string"/>
+          <xs:element minOccurs="0" name="href" type="xs:string"/>
+          <xs:element minOccurs="0" name="mediaType" type="xs:string"/>
+          <xs:element minOccurs="0" name="method" type="xs:string"/>
+          <xs:element minOccurs="0" name="rel" type="xs:string"/>
+          <xs:element minOccurs="0" name="schema" type="tns:definitionsLinkdescription"/>
+          <xs:element minOccurs="0" name="targetSchema" type="tns:definitionsLinkdescription"/>
+          <xs:element minOccurs="0" name="title" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="processorResponse">
+    <xs:complexContent>
+      <xs:extension base="tns:payPalModel">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="adviceCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="avsCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="cvvCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="eciSubmitted" type="xs:string"/>
+          <xs:element minOccurs="0" name="responseCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="vpas" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="retrievePayment">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="paymentID" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="retrievePaymentResponse">
+    <xs:sequence>
+      <xs:element name="paymentDone" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PayPalRESTException" type="tns:PayPalRESTException"/>
+  <xs:complexType name="PayPalRESTException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="details" type="tns:error"/>
+      <xs:element minOccurs="0" name="responsecode" type="xs:int"/>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="PayPalRESTException">
+    <wsdl:part element="tns:PayPalRESTException" name="PayPalRESTException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkoutPaypal">
+    <wsdl:part element="tns:checkoutPaypal" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="retrievePaymentResponse">
+    <wsdl:part element="tns:retrievePaymentResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="checkoutPaypalResponse">
+    <wsdl:part element="tns:checkoutPaypalResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="retrievePayment">
+    <wsdl:part element="tns:retrievePayment" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="IExpressCheckout">
+    <wsdl:operation name="checkoutPaypal">
+      <wsdl:input message="tns:checkoutPaypal" name="checkoutPaypal">
+    </wsdl:input>
+      <wsdl:output message="tns:checkoutPaypalResponse" name="checkoutPaypalResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:PayPalRESTException" name="PayPalRESTException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrievePayment">
+      <wsdl:input message="tns:retrievePayment" name="retrievePayment">
+    </wsdl:input>
+      <wsdl:output message="tns:retrievePaymentResponse" name="retrievePaymentResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:PayPalRESTException" name="PayPalRESTException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ExpressCheckoutServiceServiceSoapBinding" type="tns:IExpressCheckout">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="checkoutPaypal">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="checkoutPaypal">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="checkoutPaypalResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="PayPalRESTException">
+        <soap:fault name="PayPalRESTException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrievePayment">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="retrievePayment">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrievePaymentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="PayPalRESTException">
+        <soap:fault name="PayPalRESTException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ExpressCheckoutServiceService">
+    <wsdl:port binding="tns:ExpressCheckoutServiceServiceSoapBinding" name="ExpressCheckoutServicePort">
+      <soap:address location="http://192.168.102.70:28080/Wine-Payment-1.0.0/expressCheckoutService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
